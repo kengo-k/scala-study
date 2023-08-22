@@ -1,0 +1,3 @@
+java openjdk-21
+scala 3.3.0
+sbt 1.9.3
