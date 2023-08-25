@@ -1,10 +1,18 @@
 package example
 
-class ImplicitParamSpec extends munit.FunSuite {
-
+package logging {
   case class LogFormat(prefix: String)
 
-  implicit val logFormat: LogFormat = LogFormat("[INFO]")
+  object Defaults {
+    implicit val logFormat: LogFormat = LogFormat("[INFO]")
+    implicit val debugFormat: LogFormat = LogFormat("[DEBUG]")
+  }
+}
+
+class ImplicitParamSpec extends munit.FunSuite {
+
+  import logging.LogFormat
+  import logging.Defaults.logFormat
 
   def log(message: String)(implicit logFormat: LogFormat): String = {
     s"${logFormat.prefix} $message"
@@ -12,6 +20,10 @@ class ImplicitParamSpec extends munit.FunSuite {
 
   test("log") {
     assertEquals(log("Hello"), "[INFO] Hello")
+  }
+
+  test("log with implicit parameter") {
+    assertEquals(log("Hello")(logging.Defaults.debugFormat), "[DEBUG] Hello")
   }
 
 }
