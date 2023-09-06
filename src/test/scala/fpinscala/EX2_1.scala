@@ -52,6 +52,14 @@ class EX2_1 extends munit.FunSuite {
     assertEquals(fib(5), 5)
   }
 
+  // fib(5) = loop(5, 0, 1)
+  //          loop(4, 1, 1)
+  //          loop(3, 1, 2)
+  //          loop(2, 2, 3)
+  //          loop(1, 3, 5)
+  //          loop(0, 5, 8)
+  //          5
+
   test("fib(6)") {
     assertEquals(fib_simple(6), 8)
     assertEquals(fib(6), 8)
